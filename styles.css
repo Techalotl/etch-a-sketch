@@ -1,0 +1,75 @@
+@import url('https://fonts.googleapis.com/css2?family=League+Script&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Just+Another+Hand&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: "Just Another Hand", cursive;
+    background-color: #ebe7e7;
+}
+
+.frame {
+    border: 2px solid black;
+    height: 575px;
+    width: 625px;
+    margin-top: 20px;
+    padding: 10px;
+    border-radius: 5%;
+    box-shadow: 1px 1px 0px 0px, 2px 2px 0px 0px, 3px 3px 0px 0px, 4px 4px 0px 0px, 5px 5px 0px 0px;
+    background-color: white;
+}
+
+h1 {
+    font-family: "League Script", cursive;
+    font-size: 60px;
+    text-align: center;
+    margin-bottom: -10px;
+}
+
+.grid-container {
+    height: 425px;
+    width: 425px;
+    border: 2px solid black;
+    margin: auto;
+    border-radius: 2%;
+    box-shadow: 1px 1px 0px 0px, 2px 2px 0px 0px, 3px 3px 0px 0px, 4px 4px 0px 0px, 5px 5px 0px 0px;
+    background-color: #ebe7e7;
+}
+
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 70px;
+}
+
+button {
+    font-family: "Just Another Hand", cursive;
+    font-size: 22px;
+    border-radius: 50%;
+    height: 60px;
+    width: 60px;
+    cursor: pointer;
+    margin-top: auto;
+    padding: 5px;
+    box-shadow: 1px 1px 0px 0px, 2px 2px 0px 0px, 3px 3px 0px 0px, 4px 4px 0px 0px, 5px 5px 0px 0px;
+    background-color: rgb(248, 248, 248);
+}
+
+button:active {
+  box-shadow: 0px 0px 0px 0px;
+  top: 5px;
+  left: 5px;
+}
+
+.footer {
+    padding: 10px;
+}
