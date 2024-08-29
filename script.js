@@ -15,6 +15,17 @@ for(let i = 0; i < (squaresPerSide*squaresPerSide); i++) {
     gridContainer.appendChild(div.cloneNode(true));
 }
 
+function draw() {
+    const squares = document.querySelectorAll(".square");
+    squares.forEach(square => {
+        square.addEventListener("mousedown", () => {
+            square.style.backgroundColor = "black";
+        })
+});
+}
+
+draw();
+
 function removeFirstGrid(element) {
     while (element.firstChild) {
       element.removeChild(element.firstChild);
@@ -28,6 +39,7 @@ function changeGrid(squaresPerSide) {
     for(let i = 0; i < (squaresPerSide*squaresPerSide); i++) {
         gridContainer.appendChild(div.cloneNode(true));
     }
+    draw();
 }
 
 gridButton.addEventListener("click", () => {
