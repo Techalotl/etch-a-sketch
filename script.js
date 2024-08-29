@@ -9,7 +9,6 @@ let squareSize = (gridSize/squaresPerSide)+"px"
 console.log(squareSize);
 div.style.height = squareSize;
 div.style.width = squareSize;
-div.style.border = " 1px solid white";
 div.setAttribute("class", "square");
 
 for(let i = 0; i < (squaresPerSide*squaresPerSide); i++) {
