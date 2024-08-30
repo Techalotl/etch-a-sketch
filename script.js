@@ -3,13 +3,22 @@ const gridButton = document.querySelector(".grid-button");
 const eraseButton = document.querySelector(".erase-button");
 const gridContainer = document.querySelector(".grid-container");
 const div = document.createElement("div");
-let squaresPerSide = 16;
 const gridSize = 420;
+let squaresPerSide = 16;
 let squareSize = (gridSize/squaresPerSide)+"px"
-console.log(squareSize);
 div.style.height = squareSize;
 div.style.width = squareSize;
 div.setAttribute("class", "square");
+
+// so the drawing doesn't start just by passing the mouse over
+//and the pixelated trail can be seen
+let mouseDown = false;
+gridContainer.addEventListener("mousedown", () => {
+    mouseDown = true;
+})
+gridContainer.addEventListener("mouseup", () => {
+    mouseDown = false;
+})
 
 for(let i = 0; i < (squaresPerSide*squaresPerSide); i++) {
     gridContainer.appendChild(div.cloneNode(true));
@@ -19,7 +28,9 @@ function draw() {
     const squares = document.querySelectorAll(".square");
     squares.forEach(square => {
         square.addEventListener("mouseover", () => {
+            if (mouseDown) {
             square.style.backgroundColor = "black";
+            }
         })
 });
 }
