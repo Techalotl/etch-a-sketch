@@ -18,7 +18,7 @@ for(let i = 0; i < (squaresPerSide*squaresPerSide); i++) {
 function draw() {
     const squares = document.querySelectorAll(".square");
     squares.forEach(square => {
-        square.addEventListener("mousedown", () => {
+        square.addEventListener("mouseover", () => {
             square.style.backgroundColor = "black";
         })
 });
@@ -43,13 +43,26 @@ function changeGrid(squaresPerSide) {
 }
 
 gridButton.addEventListener("click", () => {
-    squaresPerSide = prompt("Enter a number between 1 and 100:", 16)
-    if (squaresPerSide === null || isNaN(squaresPerSide) === true ||
-        squaresPerSide < 1 || squaresPerSide > 100) {
+    squaresPerSide = +prompt("Enter a number between 1 and 100:", 16)
+    if (squaresPerSide === null) {
+        return;
+    } else if (isNaN(squaresPerSide) || squaresPerSide < 1 ||
+        squaresPerSide > 100) {
         alert("That's not a valid number!");
+        return;
+    } else if (!Number.isInteger(squaresPerSide)) {
+        alert("The number must be an integer.");
         return;
     }
     removeFirstGrid(gridContainer);
     changeGrid(squaresPerSide);
-    console.log(squaresPerSide);
 })
+
+function erase() {
+    const squares = document.querySelectorAll(".square");
+    squares.forEach(square => {
+            square.style.backgroundColor = "#ebe7e7";
+        })
+}
+
+eraseButton.addEventListener("click", erase);
