@@ -5,9 +5,6 @@ const gridContainer = document.querySelector(".grid-container");
 const div = document.createElement("div");
 const gridSize = 420;
 let squaresPerSide = 16;
-let squareSize = (gridSize/squaresPerSide)+"px"
-div.style.height = squareSize;
-div.style.width = squareSize;
 div.setAttribute("class", "square");
 
 // so the drawing doesn't start just by passing the mouse over
@@ -20,45 +17,47 @@ gridContainer.addEventListener("mouseup", () => {
     mouseDown = false;
 })
 
-for(let i = 0; i < (squaresPerSide*squaresPerSide); i++) {
-    gridContainer.appendChild(div.cloneNode(true));
-}
-
-function draw() {
-    const squares = document.querySelectorAll(".square");
-    squares.forEach(square => {
-        square.addEventListener("mouseover", () => {
-            if (mouseDown) {
-                if(colorButton.innerText == "rainbow mode") {
-                    square.style.backgroundColor = "black";
-                } else if(colorButton.innerText == "rainbow mode off") {
-                    square.style.backgroundColor = "rgb("+randomColorNumber()+","+randomColorNumber()+","+randomColorNumber()+")";
-                }
-            }
-        })
-});
-}
-
-function randomColorNumber () {
-    return Math.floor(Math.random() * 255);
-}
-
-draw();
-
-function removeFirstGrid(element) {
-    while (element.firstChild) {
-      element.removeChild(element.firstChild);
-    }
-}
-
-function changeGrid(squaresPerSide) {
-    squareSize = (gridSize/squaresPerSide)+"px"
+function createGrid (squaresPerSide) {
+    let squareSize = (gridSize/squaresPerSide)+"px";
     div.style.height = squareSize;
     div.style.width = squareSize;
     for(let i = 0; i < (squaresPerSide*squaresPerSide); i++) {
         gridContainer.appendChild(div.cloneNode(true));
     }
     draw();
+}
+
+function draw() {
+    const squares = document.querySelectorAll(".square");
+    squares.forEach(square => {
+        square.addEventListener("mousemove", () => {
+            if (mouseDown) {
+                colorMode(square);
+            }
+        })
+        square.addEventListener("click", () => {
+            colorMode(square);    
+        })
+});
+}
+
+function randomColor () {
+    return Math.floor(Math.random() * 255);
+}
+
+function colorMode (element) {
+    if(colorButton.innerText === "rainbow mode") {
+        element.style.backgroundColor = "black";
+    } else if(colorButton.innerText === "black") {
+        element.style.backgroundColor =
+        "rgb("+randomColor()+","+randomColor()+","+randomColor()+")";
+    }
+}
+
+function removeFirstGrid(element) {
+    while (element.firstChild) {
+      element.removeChild(element.firstChild);
+    }
 }
 
 gridButton.addEventListener("click", () => {
@@ -77,25 +76,23 @@ gridButton.addEventListener("click", () => {
         return;
     }
     removeFirstGrid(gridContainer);
-    changeGrid(squaresPerSide);
+    createGrid(squaresPerSide);
 })
 
-function erase() {
+eraseButton.addEventListener("click", () => {
     const squares = document.querySelectorAll(".square");
     squares.forEach(square => {
             square.style.backgroundColor = "#ebe7e7";
         })
-}
-
-eraseButton.addEventListener("click", erase);
+});
 
 colorButton.addEventListener("click",(e)=> {
     if (e.target.innerText === "rainbow mode") {
-        colorButton.textContent = "rainbow mode off";
-        colorButton.style.boxShadow = "0px 0px 0px 0px";
-    } else if (e.target.innerText === "rainbow mode off") {
+        colorButton.textContent = "black";
+    } else if (e.target.innerText === "black") {
         colorButton.textContent = "rainbow mode";
-        colorButton.style.boxShadow = "1px 1px 0px 0px, 2px 2px 0px 0px, 3px 3px 0px 0px, 4px 4px 0px 0px, 5px 5px 0px 0px";
     }
     draw();
 })
+
+createGrid(squaresPerSide);
